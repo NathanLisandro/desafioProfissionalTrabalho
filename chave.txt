@@ -1,0 +1,2 @@
+http://gateway.marvel.com/v1/public/comics?ts=1254&apikey=b7cd9c62bb9bb00d6460c2b86ec9a20c&hash=5939850cbd718bc3988181d18f3b3749
+1590

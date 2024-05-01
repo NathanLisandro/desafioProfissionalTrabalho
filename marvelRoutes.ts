@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import MarvelController from './marvelController';
+import MarvelController from './controllers/marvelController';
 
 const marvelRoutes = Router();
 

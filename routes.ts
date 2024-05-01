@@ -1,12 +1,10 @@
 // routes.ts
 import { Router } from 'express';
-import MarvelController from './marvelController';
+import MarvelController from './controllers/marvelController';
 
 const router = Router();
 const marvelController = new MarvelController();
 
-router.get('/fill-database',  (req, res) => {
-    res.status(200).json(marvelController.getComics);
-});
+router.post('/fill-database', marvelController.fillDatabase.bind(marvelController));
 
 export { router as routes };

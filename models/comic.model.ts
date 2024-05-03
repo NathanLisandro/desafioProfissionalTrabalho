@@ -1,3 +1,4 @@
+import { Character } from "./character.model";
 import { Creator } from "./creator.model";
 
 export interface Comic {
@@ -7,4 +8,5 @@ export interface Comic {
     data_publicacao: Date;
     capa_url: string;
     creators: Creator[];
+    characters: Character[];
 }

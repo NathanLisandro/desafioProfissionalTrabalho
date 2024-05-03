@@ -15,16 +15,7 @@ export class ComicService {
         ComicService.connection = connection;
     }
 
-    static async getComics(): Promise<any[]> {
-        try {
-            const response = await axios.get(`http://gateway.marvel.com/v1/public/comics/1590?ts=${ts}&apikey=${publicKey}&hash=${hash}`);
-            const comics = response.data?.data?.results;
-            return comics || [];
-        } catch (error) {
-            console.error('Erro ao obter dados da Marvel API:', error);
-            return [];
-        }
-    }
+
 
     static async insertComic(title: string, description: string, date: Date, thumbnail: any): Promise<number> {
         return new Promise((resolve, reject) => {
@@ -37,4 +28,87 @@ export class ComicService {
                 });
         });
     }
+
+
+    static async getAllComics(): Promise<any[]> {
+        return new Promise<any[]>((resolve, reject) => {
+            ComicService.connection.query('SELECT * FROM Quadrinhos', (error: MysqlError | null, results: any) => {
+                if (error) {
+                    console.error('Erro ao buscar quadrinhos:', error);
+                    reject([]);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
+
+    static async getComicById(id: number): Promise<any | null> {
+        return new Promise<any | null>((resolve, reject) => {
+            ComicService.connection.query('SELECT * FROM Quadrinhos WHERE id = ?', [id], (error: MysqlError | null, results: any) => {
+                if (error) {
+                    console.error('Erro ao buscar quadrinho por ID:', error);
+                    reject(null);
+                } else {
+                    if (results.length > 0) {
+                        resolve(results[0]);
+                    } else {
+                        resolve(null);
+                    }
+                }
+            });
+        });
+    }
+
+    static async createComic(title: string,  publication_date: Date, cover_url: string): Promise<number | null> {
+        return new Promise<number | null>((resolve, reject) => {
+            ComicService.connection.query(
+                'INSERT INTO Quadrinhos (titulo, data_publicacao, capa_url) VALUES (?, ?, ?, ?)',
+                [title, publication_date, cover_url],
+                (error: MysqlError | null, results: any) => {
+                    if (error) {
+                        console.error('Erro ao inserir quadrinho:', error);
+                        reject(null);
+                    } else {
+                        console.log('Quadrinho inserido com sucesso:', results.insertId);
+                        resolve(results.insertId);
+                    }
+                }
+            );
+        });
+    }
+
+    static async updateComic(id: number, title: string, publication_date: Date, cover_url: string): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            ComicService.connection.query(
+                'UPDATE Comics SET titulo = ?, data_publicacao = ?, capa = ? WHERE id = ?',
+                [title, publication_date, cover_url, id],
+                (error: MysqlError | null) => {
+                    if (error) {
+                        console.error('Erro ao atualizar quadrinho:', error);
+                        reject(false);
+                    } else {
+                        console.log('Quadrinho atualizado com sucesso');
+                        resolve(true);
+                    }
+                }
+            );
+        });
+    }
+
+    static async deleteComic(id: number): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            ComicService.connection.query('DELETE FROM Quadrinhos WHERE id = ?', [id], (error: MysqlError | null) => {
+                if (error) {
+                    console.error('Erro ao deletar quadrinho:', error);
+                    reject(false);
+                } else {
+                    console.log('Quadrinho deletado com sucesso');
+                    resolve(true);
+                }
+            });
+        });
+    }
 }
+
+

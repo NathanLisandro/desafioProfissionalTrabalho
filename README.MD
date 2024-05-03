@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha API de Quadrinhos</title>
-</head>
-<body>
-
 <h1> API de Quadrinhos</h1>
 
 <p>Esta é uma API para gerenciar quadrinhos, personagens e criadores relacionados ao mundo dos quadrinhos.</p>

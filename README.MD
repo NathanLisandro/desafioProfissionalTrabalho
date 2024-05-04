@@ -13,6 +13,6 @@
 <p>Você pode acessar a documentação da API clicando <a href="https://github.com/NathanLisandro/desafioProfissionalTrabalho/blob/main/documentacaoapi.md">aqui</a> ou clicando no arquivo na source code chamado "documentacaoapi.md"</p>
 
 <h2>Teste de Carga</h2>
-<p>Você pode acessar o teste de carga no seguinte link: <a href="https://docs.google.com/spreadsheets/d/10xLnsPFXG9kYOZmgjz2tXUTr5qpXuIO0SIkxT2O2MMY/edit?usp=sharing">Teste de Carga</a></p>
+<p>Você pode acessar o teste de carga no seguinte link: <a href="https://docs.google.com/spreadsheets/d/10xLnsPFXG9kYOZmgjz2tXUTr5qpXuIO0SIkxT2O2MMY/edit?usp=sharing">Teste de Carga</a> ou clicando <a href="https://github.com/NathanLisandro/desafioProfissionalTrabalho/blob/main/Loading.csv">aqui</a>, para abrir aqui no github</p>
 
 <h2>Saga escolhida para o preenchimento no banco de dados foi Official Handbook of the Marvel Universe (2004) #9 (THE WOMEN OF MARVEL), com o id: 1590<h2>

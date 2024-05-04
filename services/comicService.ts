@@ -1,4 +1,3 @@
-// comicService.ts
 import axios from 'axios';
 import crypto from 'crypto';
 import mysql, { MysqlError } from 'mysql';

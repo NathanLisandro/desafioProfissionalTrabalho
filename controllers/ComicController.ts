@@ -1,4 +1,3 @@
-// comicController.ts
 import { Request, Response } from 'express';
 import { ComicService } from '../services/comicService';
 

@@ -1,10 +1,10 @@
-import { OkPacket, RowDataPacket } from 'mysql2/promise'; // Importar OkPacket e RowDataPacket diretamente do mysql2
+import { OkPacket, RowDataPacket } from 'mysql2/promise';
 import request from 'supertest';
 import app from '../app';
 import { createPool, Pool, PoolConnection } from 'mysql2/promise';
 describe('Testando as rotas da API', () => {
     let connection: Pool;
-    let characterId: number; // Variável para armazenar o ID do personagem
+    let characterId: number; 
 
     beforeAll(async () => {
         connection = createPool({
@@ -14,13 +14,11 @@ describe('Testando as rotas da API', () => {
             database: 'desafioProfissional',
         });
 
-        // Consulta ao banco de dados para obter o ID do primeiro personagem disponível
         const [rows] = await connection.execute<RowDataPacket[]>('SELECT id FROM Personagens LIMIT 1');
         if (rows && rows.length > 0) {
             characterId = rows[0].id;
         } else {
             console.error('Nenhum personagem encontrado no banco de dados. Inserindo novo personagem...');
-            // Inserir um novo personagem no banco de dados
             const [insertResult] = await connection.execute<OkPacket>('INSERT INTO Personagens (nome, imagem_url) VALUES (?, ?)', ['Novo Personagem', 'http://example.com/image.jpg']);
             if (insertResult && insertResult.insertId) {
                 characterId = insertResult.insertId;
@@ -44,11 +42,7 @@ describe('Testando as rotas da API', () => {
     });
 
     it('Deve retornar um personagem específico pelo ID', async () => {
-        // Verifica se o ID do personagem está definido
-        if (!characterId) {
-            fail('ID do personagem não encontrado.');
-        }
-
+  
         const response = await request(app).get(`/characters/${characterId}`);
         expect(response.status).toBe(200);
     });
@@ -66,10 +60,6 @@ describe('Testando as rotas da API', () => {
     });
 
     it('Deve atualizar um personagem específico pelo ID', async () => {
-        // Verifica se o ID do personagem está definido
-        if (!characterId) {
-            fail('ID do personagem não encontrado.');
-        }
 
         const updatedCharacter = {
             "nome": "teste",
@@ -82,10 +72,6 @@ describe('Testando as rotas da API', () => {
     });
 
     it('Deve deletar um personagem específico pelo ID', async () => {
-        // Verifica se o ID do personagem está definido
-        if (!characterId) {
-            fail('ID do personagem não encontrado.');
-        }
 
         const response = await request(app).delete(`/characters/${characterId}`);
         expect(response.status).toBe(200);

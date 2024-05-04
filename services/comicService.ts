@@ -63,7 +63,7 @@ export class ComicService {
     static async createComic(title: string,  publication_date: Date, cover_url: string): Promise<number | null> {
         return new Promise<number | null>((resolve, reject) => {
             ComicService.connection.query(
-                'INSERT INTO Quadrinhos (titulo, data_publicacao, capa_url) VALUES (?, ?, ?, ?)',
+                'INSERT INTO Quadrinhos (titulo, data_publicacao, capa_url) VALUES (?, ?, ?)',
                 [title, publication_date, cover_url],
                 (error: MysqlError | null, results: any) => {
                     if (error) {
@@ -81,7 +81,7 @@ export class ComicService {
     static async updateComic(id: number, title: string, publication_date: Date, cover_url: string): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             ComicService.connection.query(
-                'UPDATE Comics SET titulo = ?, data_publicacao = ?, capa = ? WHERE id = ?',
+                'UPDATE Quadrinhos SET titulo = ?, data_publicacao = ?, capa_url = ? WHERE id = ?',
                 [title, publication_date, cover_url, id],
                 (error: MysqlError | null) => {
                     if (error) {
@@ -98,6 +98,16 @@ export class ComicService {
 
     static async deleteComic(id: number): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
+            ComicService.connection.query('DELETE FROM Criadores WHERE quadrinho_id = ?', [id], (error: MysqlError | null) => {
+                if (error) {
+                    console.error('Erro ao deletar criadores:', error);
+                    reject(false);
+                } else {
+                    console.log('Criadores deletados com sucesso');
+       
+                }
+            });
+    
             ComicService.connection.query('DELETE FROM Quadrinhos WHERE id = ?', [id], (error: MysqlError | null) => {
                 if (error) {
                     console.error('Erro ao deletar quadrinho:', error);

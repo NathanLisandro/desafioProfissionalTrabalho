@@ -79,7 +79,7 @@ class CharacterService {
         });
     }
 
-    static  async deleteCharacter(id: number): Promise<boolean> {
+ static  async deleteCharacter(id: number): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             CharacterService.connection.query('DELETE FROM Personagens WHERE id = ?', [id], (error: MysqlError | null, results: any) => {
                 if (error) {

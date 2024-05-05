@@ -14,10 +14,10 @@
         },
         {
             "id": 2,
-            "titulo": "Batman",
-            "descricao": "Descrição do Batman",
+            "titulo": "Mulher Maravilha",
+            "descricao": "Descrição da Mulher Maravilha",
             "data_publicacao": "2024-05-02",
-            "capa_url": "http://example.com/batman.jpg"
+            "capa_url": "http://example.com/MulherMaravilha.jpg"
         }
     ]
     </code></pre>
@@ -77,9 +77,9 @@
         },
         {
             "id": 2,
-            "nome": "Batman",
-            "descricao": "Descrição do Batman",
-            "imagem_url": "http://example.com/batman.jpg"
+            "nome": "Mulher Maravilha",
+            "descricao": "Descrição da Mulher Maravilha",
+            "imagem_url": "http://example.com/MulherMaravilha.jpg"
         }
     ]
     </code></pre>
